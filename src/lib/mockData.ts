@@ -1,0 +1,400 @@
+export const patient = {
+  name: "Sarah Chen",
+  age: 42,
+  pronouns: "she/her",
+  location: "Naperville, IL",
+  insurance: {
+    plan: "BlueCross PPO 3000",
+    deductible: 3000,
+    deductibleMet: 1840,
+    oopMax: 6500,
+    oopMet: 2210,
+  },
+  primaryCare: "Dr. Marcus Reid, MD — Naperville Internal Medicine",
+};
+
+export type Severity = "low" | "moderate" | "high" | "critical";
+export type Urgency = "routine" | "soon" | "urgent" | "emergency";
+
+export const conditions = [
+  { id: "c1", name: "Type 2 Diabetes", since: "2019-04", status: "active", icd: "E11.9" },
+  { id: "c2", name: "Hypertension", since: "2017-08", status: "active", icd: "I10" },
+  { id: "c3", name: "Hypothyroidism", since: "2021-02", status: "active", icd: "E03.9" },
+  { id: "c4", name: "GERD", since: "2023-11", status: "active", icd: "K21.9" },
+  { id: "c5", name: "Vitamin D Deficiency", since: "2024-01", status: "monitoring", icd: "E55.9" },
+];
+
+export const medications = [
+  {
+    id: "m1",
+    name: "Metformin",
+    brand: "Glucophage",
+    dose: "1000 mg",
+    frequency: "twice daily",
+    prescriber: "Dr. Reid",
+    started: "2019-04-18",
+    for: "Type 2 Diabetes",
+    adherence: 0.94,
+    sideEffects: ["nausea", "diarrhea", "metallic taste"],
+    refillsLeft: 2,
+    nextRefill: "2026-08-04",
+  },
+  {
+    id: "m2",
+    name: "Lisinopril",
+    brand: "Prinivil",
+    dose: "20 mg",
+    frequency: "once daily",
+    prescriber: "Dr. Reid",
+    started: "2017-08-22",
+    for: "Hypertension",
+    adherence: 0.88,
+    sideEffects: ["dry cough", "dizziness", "elevated potassium"],
+    refillsLeft: 4,
+    nextRefill: "2026-09-11",
+  },
+  {
+    id: "m3",
+    name: "Levothyroxine",
+    brand: "Synthroid",
+    dose: "75 mcg",
+    frequency: "once daily, morning",
+    prescriber: "Dr. Patel (Endo)",
+    started: "2021-02-09",
+    for: "Hypothyroidism",
+    adherence: 0.97,
+    sideEffects: ["insomnia if overdosed", "palpitations"],
+    refillsLeft: 3,
+    nextRefill: "2026-08-19",
+  },
+  {
+    id: "m4",
+    name: "Omeprazole",
+    brand: "Prilosec",
+    dose: "20 mg",
+    frequency: "once daily",
+    prescriber: "Dr. Reid",
+    started: "2023-11-30",
+    for: "GERD",
+    adherence: 0.82,
+    sideEffects: ["headache", "B12 deficiency (long-term)", "bone density loss"],
+    refillsLeft: 1,
+    nextRefill: "2026-07-30",
+  },
+  {
+    id: "m5",
+    name: "Vitamin D3",
+    brand: "OTC",
+    dose: "2000 IU",
+    frequency: "once daily",
+    prescriber: "Self",
+    started: "2024-02-01",
+    for: "Vitamin D Deficiency",
+    adherence: 0.7,
+    sideEffects: [],
+    refillsLeft: null,
+    nextRefill: null,
+  },
+];
+
+export const interactions = [
+  {
+    id: "i1",
+    drugs: ["Metformin", "Omeprazole"],
+    severity: "moderate",
+    plain:
+      "Long-term omeprazole may lower B12 absorption. Metformin already carries B12 depletion risk. Combined, worth a B12 check every 6-12 months.",
+    action: "Ask Dr. Reid to add serum B12 to your next lab panel.",
+  },
+  {
+    id: "i2",
+    drugs: ["Lisinopril", "Ibuprofen (OTC)"],
+    severity: "moderate",
+    plain:
+      "NSAIDs like ibuprofen can reduce lisinopril's blood pressure effect and stress your kidneys. You logged ibuprofen 3× last week.",
+    action: "Prefer acetaminophen for pain when possible, or ask about a kidney-safe alternative.",
+  },
+  {
+    id: "i3",
+    drugs: ["Levothyroxine", "Calcium (Vitamin D3 with calcium)"],
+    severity: "minor",
+    plain:
+      "Calcium can bind levothyroxine and reduce absorption. Space them at least 4 hours apart.",
+    action: "Take levothyroxine on waking; take vitamin D + calcium with lunch.",
+  },
+];
+
+export const labs = [
+  {
+    id: "l1",
+    name: "HbA1c",
+    value: 7.3,
+    unit: "%",
+    date: "2026-06-14",
+    reference: "< 7.0 (ADA target)",
+    status: "above",
+    trend: [8.4, 8.1, 7.7, 7.5, 7.4, 7.3],
+    trendDates: ["2024-06", "2024-12", "2025-04", "2025-08", "2026-02", "2026-06"],
+  },
+  {
+    id: "l2",
+    name: "LDL Cholesterol",
+    value: 118,
+    unit: "mg/dL",
+    date: "2026-06-14",
+    reference: "< 100",
+    status: "above",
+    trend: [142, 138, 129, 124, 121, 118],
+    trendDates: ["2024-06", "2024-12", "2025-04", "2025-08", "2026-02", "2026-06"],
+  },
+  {
+    id: "l3",
+    name: "TSH",
+    value: 2.8,
+    unit: "mIU/L",
+    date: "2026-06-14",
+    reference: "0.4 – 4.0",
+    status: "normal",
+    trend: [4.9, 3.6, 2.9, 2.7, 2.8, 2.8],
+    trendDates: ["2024-06", "2024-12", "2025-04", "2025-08", "2026-02", "2026-06"],
+  },
+  {
+    id: "l4",
+    name: "Vitamin D (25-OH)",
+    value: 24,
+    unit: "ng/mL",
+    date: "2026-06-14",
+    reference: "30 – 100",
+    status: "below",
+    trend: [18, 21, 23, 25, 24, 24],
+    trendDates: ["2024-06", "2024-12", "2025-04", "2025-08", "2026-02", "2026-06"],
+  },
+  {
+    id: "l5",
+    name: "eGFR",
+    value: 76,
+    unit: "mL/min/1.73m²",
+    date: "2026-06-14",
+    reference: "> 90",
+    status: "monitor",
+    trend: [88, 84, 81, 79, 77, 76],
+    trendDates: ["2024-06", "2024-12", "2025-04", "2025-08", "2026-02", "2026-06"],
+  },
+  {
+    id: "l6",
+    name: "Blood Pressure",
+    value: 138,
+    unit: "/86 mmHg",
+    date: "2026-07-20",
+    reference: "< 130/80",
+    status: "above",
+    trend: [148, 144, 141, 139, 138, 138],
+    trendDates: ["2024-06", "2024-12", "2025-04", "2025-08", "2026-02", "2026-07"],
+  },
+];
+
+export const symptoms = [
+  { id: "s1", date: "2026-07-22", region: "chest", label: "Occasional heartburn after dinner", severity: 3, notes: "Worse when eating past 8pm" },
+  { id: "s2", date: "2026-07-21", region: "head", label: "Mild headache, right side", severity: 2, notes: "Cleared after water" },
+  { id: "s3", date: "2026-07-19", region: "throat", label: "Persistent dry cough", severity: 4, notes: "Started ~10 days ago, worse at night" },
+  { id: "s4", date: "2026-07-18", region: "leg", label: "Ankle swelling, left", severity: 3, notes: "Noticed after long drive" },
+  { id: "s5", date: "2026-07-15", region: "general", label: "Fatigue mid-afternoon", severity: 4, notes: "Every day this week" },
+  { id: "s6", date: "2026-07-12", region: "stomach", label: "Nausea, mild", severity: 2, notes: "30 min after metformin" },
+  { id: "s7", date: "2026-07-08", region: "chest", label: "Heartburn again", severity: 4, notes: "Woke me up at 2am" },
+];
+
+export const documents = [
+  { id: "d1", name: "Metabolic Panel — Quest Diagnostics", type: "Lab Report", date: "2026-06-14", pages: 4, source: "Quest Portal", status: "processed" },
+  { id: "d2", name: "Cardiology Consult — Dr. Yamamoto", type: "Consult Note", date: "2026-05-02", pages: 2, source: "Uploaded PDF", status: "processed" },
+  { id: "d3", name: "Prescription — Levothyroxine renewal", type: "Prescription", date: "2026-04-19", pages: 1, source: "Photo upload", status: "processed" },
+  { id: "d4", name: "Discharge Summary — ER visit 3/8", type: "Discharge", date: "2026-03-08", pages: 3, source: "Uploaded PDF", status: "processed" },
+  { id: "d5", name: "Thyroid Panel — LabCorp", type: "Lab Report", date: "2026-02-11", pages: 2, source: "LabCorp Portal", status: "processed" },
+  { id: "d6", name: "Insurance EOB — Q1 Statement", type: "EOB", date: "2026-04-05", pages: 6, source: "Uploaded PDF", status: "processing" },
+];
+
+export const insights = [
+  {
+    id: "in1",
+    tag: "Possible side effect",
+    severity: "moderate",
+    title: "Your dry cough may be from Lisinopril.",
+    body: "A dry, persistent cough is reported in ~10% of patients on ACE inhibitors like Lisinopril. Your cough started 10 days ago and hasn't cleared. Worth mentioning at your next visit — an ARB (e.g. losartan) is a common alternative if this is the cause.",
+    sources: ["Your symptom log (7/19–7/22)", "Lisinopril label — DailyMed", "AHA 2024 hypertension guideline"],
+    action: "Bring this up with Dr. Reid",
+    date: "2026-07-22",
+  },
+  {
+    id: "in2",
+    tag: "Lab trend",
+    severity: "moderate",
+    title: "Kidney function drifting down over 24 months.",
+    body: "Your eGFR has moved from 88 → 76 mL/min/1.73m² since June 2024. Still within normal range, but the direction is worth watching, especially with diabetes and hypertension in the picture.",
+    sources: ["Metabolic panels 6/2024 → 6/2026", "KDIGO 2024 CKD guideline"],
+    action: "Ask about repeat labs in 3 months instead of 6",
+    date: "2026-06-15",
+  },
+  {
+    id: "in3",
+    tag: "Interaction watch",
+    severity: "minor",
+    title: "Timing matters: Levothyroxine + calcium",
+    body: "You take Vitamin D3 (with calcium) at breakfast, same time as Levothyroxine. Calcium binds levothyroxine — you may only be absorbing ~70% of your thyroid dose.",
+    sources: ["Levothyroxine label — DailyMed"],
+    action: "Move Vitamin D3 to lunch",
+    date: "2026-07-10",
+  },
+  {
+    id: "in4",
+    tag: "Screening reminder",
+    severity: "low",
+    title: "Diabetic eye exam due next month.",
+    body: "ADA recommends annual dilated eye exams for T2D. Your last one was August 2025. In-network options within 5 miles: Dr. Nguyen (Naperville Eye), Dr. Blake (Retina Associates).",
+    sources: ["ADA Standards of Care 2026", "Your visit history"],
+    action: "Book with Dr. Nguyen — $30 copay",
+    date: "2026-07-05",
+  },
+  {
+    id: "in5",
+    tag: "Symptom pattern",
+    severity: "low",
+    title: "Heartburn clusters with late dinners.",
+    body: "5 of your last 6 heartburn logs happened on days you ate dinner after 8pm. Not a diagnosis — just a pattern worth knowing.",
+    sources: ["Your symptom log (past 90 days)"],
+    action: "Try dinner before 7pm for 2 weeks",
+    date: "2026-07-20",
+  },
+];
+
+export const providers = [
+  {
+    id: "p1",
+    name: "Dr. Marcus Reid, MD",
+    specialty: "Internal Medicine",
+    practice: "Naperville Internal Medicine",
+    distance: 2.1,
+    rating: 4.8,
+    reviews: 214,
+    inNetwork: true,
+    telehealth: true,
+    nextAvailable: "2026-08-04",
+    estimatedCost: 30,
+    role: "Primary Care",
+  },
+  {
+    id: "p2",
+    name: "Dr. Aiko Yamamoto, MD",
+    specialty: "Cardiology",
+    practice: "Edward-Elmhurst Heart",
+    distance: 4.4,
+    rating: 4.9,
+    reviews: 178,
+    inNetwork: true,
+    telehealth: true,
+    nextAvailable: "2026-08-18",
+    estimatedCost: 60,
+    role: "Specialist",
+  },
+  {
+    id: "p3",
+    name: "Dr. Sanjay Patel, MD",
+    specialty: "Endocrinology",
+    practice: "DuPage Endocrine Group",
+    distance: 6.8,
+    rating: 4.7,
+    reviews: 92,
+    inNetwork: true,
+    telehealth: false,
+    nextAvailable: "2026-09-02",
+    estimatedCost: 60,
+    role: "Specialist",
+  },
+  {
+    id: "p4",
+    name: "Dr. Linh Nguyen, OD",
+    specialty: "Ophthalmology",
+    practice: "Naperville Eye Associates",
+    distance: 3.2,
+    rating: 4.8,
+    reviews: 156,
+    inNetwork: true,
+    telehealth: false,
+    nextAvailable: "2026-08-11",
+    estimatedCost: 30,
+    role: "Screening",
+  },
+  {
+    id: "p5",
+    name: "Dr. Reed Blake, MD",
+    specialty: "Ophthalmology",
+    practice: "Retina Associates of IL",
+    distance: 8.9,
+    rating: 4.6,
+    reviews: 74,
+    inNetwork: true,
+    telehealth: false,
+    nextAvailable: "2026-08-06",
+    estimatedCost: 45,
+    role: "Screening",
+  },
+];
+
+export type TimelineEvent = {
+  id: string;
+  date: string;
+  kind: "diagnosis" | "medication" | "lab" | "symptom" | "visit" | "document" | "insight";
+  label: string;
+  detail: string;
+};
+
+export const timeline: TimelineEvent[] = [
+  { id: "t1", date: "2017-08-22", kind: "diagnosis", label: "Diagnosed: Hypertension", detail: "Dr. Reid — starts Lisinopril 10mg" },
+  { id: "t2", date: "2019-04-18", kind: "diagnosis", label: "Diagnosed: Type 2 Diabetes", detail: "HbA1c 8.9, Dr. Reid — starts Metformin 500mg BID" },
+  { id: "t3", date: "2021-02-09", kind: "diagnosis", label: "Diagnosed: Hypothyroidism", detail: "TSH 6.8, Dr. Patel — starts Levothyroxine 50mcg" },
+  { id: "t4", date: "2023-11-30", kind: "diagnosis", label: "Diagnosed: GERD", detail: "Dr. Reid — starts Omeprazole 20mg" },
+  { id: "t5", date: "2024-01-14", kind: "lab", label: "Vitamin D low: 18 ng/mL", detail: "Starts D3 2000 IU OTC" },
+  { id: "t6", date: "2025-08-20", kind: "visit", label: "Annual eye exam — normal", detail: "Dr. Nguyen — no retinopathy" },
+  { id: "t7", date: "2026-03-08", kind: "visit", label: "ER visit — chest pain, ruled out", detail: "Discharged same day, likely GERD flare" },
+  { id: "t8", date: "2026-05-02", kind: "visit", label: "Cardiology consult — Dr. Yamamoto", detail: "Stress test normal, continue current meds" },
+  { id: "t9", date: "2026-06-14", kind: "lab", label: "HbA1c 7.3 — improving", detail: "Down from 7.5 six months ago" },
+  { id: "t10", date: "2026-07-08", kind: "symptom", label: "Heartburn recurrence begins", detail: "First of a cluster of 5 logs" },
+  { id: "t11", date: "2026-07-13", kind: "symptom", label: "Dry cough starts", detail: "Persistent, worse at night" },
+  { id: "t12", date: "2026-07-22", kind: "insight", label: "AI: Cough may be Lisinopril side effect", detail: "Sourced to symptom log + drug label" },
+];
+
+export const upcomingAppointments = [
+  {
+    id: "a1",
+    provider: "Dr. Marcus Reid",
+    specialty: "Internal Medicine",
+    date: "2026-08-04",
+    time: "10:20 AM",
+    reason: "Med review — cough + BP",
+    location: "Naperville Internal Medicine",
+    prepReady: true,
+  },
+  {
+    id: "a2",
+    provider: "Dr. Linh Nguyen",
+    specialty: "Ophthalmology",
+    date: "2026-08-11",
+    time: "2:00 PM",
+    reason: "Annual diabetic eye exam",
+    location: "Naperville Eye Associates",
+    prepReady: false,
+  },
+];
+
+export const wearable = {
+  restingHeartRate: [64, 66, 65, 67, 68, 66, 67, 65, 68, 69, 68, 67, 66, 67],
+  sleepHours: [6.2, 6.8, 7.1, 5.9, 6.5, 7.4, 7.0, 6.3, 6.9, 7.2, 6.7, 6.5, 7.1, 6.8],
+  steps: [4210, 6120, 3890, 7020, 5480, 2890, 8140, 6720, 4180, 5590, 6810, 3120, 7440, 6280],
+  bpSystolic: [134, 138, 136, 140, 138, 135, 139, 137, 141, 138, 136, 139, 138, 137],
+};
+
+export const chatSuggestions = [
+  "Why is my HbA1c still above 7?",
+  "Could my cough be from a medication?",
+  "What should I ask Dr. Reid at my next visit?",
+  "Am I due for any screenings?",
+  "Explain my last lab results in plain English.",
+];
