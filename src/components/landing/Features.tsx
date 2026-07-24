@@ -41,10 +41,12 @@ const features = [
   },
 ];
 
+import { Reveal } from "./Reveal";
+
 export default function Features() {
   return (
     <section id="platform" className="max-w-7xl mx-auto px-6 py-24">
-      <div className="max-w-3xl mb-14">
+      <Reveal className="max-w-3xl mb-14">
         <div className="chip mb-6">The platform</div>
         <h2 className="text-3xl md:text-4xl font-medium leading-tight">
           Eight things working together, {" "}
@@ -54,15 +56,17 @@ export default function Features() {
           Pieces of this exist separately today. CareNova is the first place they reason across each
           other, on top of your own data.
         </p>
-      </div>
+      </Reveal>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {features.map((f) => (
-          <div key={f.title} className="card p-6 hover:border-[color:var(--line-strong)] transition-colors">
-            <FeatureIcon kind={f.icon} />
-            <h3 className="mt-5 text-base font-medium leading-snug">{f.title}</h3>
-            <p className="mt-2 text-sm text-[color:var(--ink-70)] leading-relaxed">{f.body}</p>
-          </div>
+        {features.map((f, i) => (
+          <Reveal key={f.title} delay={i * 60}>
+            <div className="card p-6 h-full hover:border-[color:var(--line-strong)] hover:-translate-y-0.5 transition-all duration-300">
+              <FeatureIcon kind={f.icon} />
+              <h3 className="mt-5 text-base font-medium leading-snug">{f.title}</h3>
+              <p className="mt-2 text-sm text-[color:var(--ink-70)] leading-relaxed">{f.body}</p>
+            </div>
+          </Reveal>
         ))}
       </div>
     </section>

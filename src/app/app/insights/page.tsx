@@ -1,7 +1,8 @@
 import Topbar from "@/components/app/Topbar";
-import { insights } from "@/lib/mockData";
+import { getActivePatient } from "@/lib/patients";
 
-export default function InsightsPage() {
+export default async function InsightsPage() {
+  const { insights } = await getActivePatient();
   return (
     <>
       <Topbar
@@ -17,14 +18,11 @@ export default function InsightsPage() {
                 <span className={`chip ${
                   i.severity === "moderate" ? "chip-coral" :
                   i.severity === "minor" ? "chip-amber" : "chip-leaf"
-                }`}>
-                  {i.tag}
-                </span>
+                }`}>{i.tag}</span>
                 <span className="text-xs text-[color:var(--ink-50)]">{i.date}</span>
               </div>
               <h3 className="mt-4 text-lg font-medium leading-snug">{i.title}</h3>
               <p className="mt-2 text-sm text-[color:var(--ink-70)] leading-relaxed">{i.body}</p>
-
               <div className="mt-5 grid md:grid-cols-2 gap-4">
                 <div>
                   <div className="text-xs uppercase tracking-widest text-[color:var(--ink-50)] mb-2">Sources</div>

@@ -37,11 +37,13 @@ const rows = [
   },
 ];
 
+import { Reveal } from "./Reveal";
+
 export default function Differentiation() {
   return (
     <section id="difference" className="border-t border-[color:var(--line)] bg-[color:var(--cream-2)]/40">
       <div className="max-w-7xl mx-auto px-6 py-24">
-        <div className="max-w-3xl mb-12">
+        <Reveal className="max-w-3xl mb-12">
           <div className="chip mb-6">Why CareNova</div>
           <h2 className="text-3xl md:text-4xl font-medium leading-tight">
             Every piece exists somewhere. {" "}
@@ -52,8 +54,9 @@ export default function Differentiation() {
             reaches the uninsured, Medicaid patients, gig workers, retirees, and small-business
             employees they structurally exclude.
           </p>
-        </div>
+        </Reveal>
 
+        <Reveal delay={100}>
         <div className="card overflow-hidden">
           <div className="grid grid-cols-12 px-6 py-4 border-b border-[color:var(--line)] text-xs uppercase tracking-widest text-[color:var(--ink-50)]">
             <div className="col-span-3">Existing product</div>
@@ -73,6 +76,7 @@ export default function Differentiation() {
             </div>
           ))}
         </div>
+        </Reveal>
       </div>
     </section>
   );

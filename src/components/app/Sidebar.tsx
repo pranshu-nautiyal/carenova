@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { patient } from "@/lib/mockData";
+import PatientSwitcher from "./PatientSwitcher";
+import type { PatientId } from "@/lib/patients";
 
 const nav = [
   { href: "/app/dashboard", label: "Dashboard", icon: "home" },
@@ -15,25 +16,23 @@ const nav = [
   { href: "/app/providers", label: "Providers & Cost", icon: "money" },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({
+  activePatient,
+  patientList,
+}: {
+  activePatient: PatientId;
+  patientList: { id: PatientId; name: string; blurb: string }[];
+}) {
   const pathname = usePathname();
   return (
-    <aside className="hidden lg:flex flex-col w-64 flex-shrink-0 border-r border-[color:var(--line)] bg-[color:var(--cream)] sticky top-0 h-screen">
+    <aside className="hidden lg:flex flex-col w-72 flex-shrink-0 border-r border-[color:var(--line)] bg-[color:var(--cream)] sticky top-0 h-screen">
       <Link href="/" className="flex items-center gap-2 h-16 px-6 border-b border-[color:var(--line)]">
         <Logo />
         <span className="text-lg font-medium tracking-tight">CareNova</span>
       </Link>
 
-      <div className="px-4 py-5 border-b border-[color:var(--line)]">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-[color:var(--teal)] text-[color:var(--cream)] flex items-center justify-center font-medium">
-            {patient.name.split(" ").map((s) => s[0]).join("")}
-          </div>
-          <div className="min-w-0">
-            <div className="text-sm font-medium truncate">{patient.name}</div>
-            <div className="text-xs text-[color:var(--ink-70)] truncate">{patient.age} · {patient.location}</div>
-          </div>
-        </div>
+      <div className="p-3 border-b border-[color:var(--line)]">
+        <PatientSwitcher active={activePatient} list={patientList} />
       </div>
 
       <nav className="flex-1 overflow-y-auto p-3">
@@ -68,7 +67,7 @@ export default function Sidebar() {
             Demo mode
           </div>
           <div className="mt-1.5 text-[color:var(--ink-70)] leading-relaxed">
-            Data shown belongs to a fictional patient, Sarah Chen.
+            All data belongs to fictional patients. No real PHI in this build.
           </div>
         </div>
       </div>

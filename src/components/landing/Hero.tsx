@@ -1,10 +1,10 @@
 import Link from "next/link";
-import KnowledgeGraphHero from "./KnowledgeGraphHero";
+import IllustratedScene from "./IllustratedScene";
 
 export default function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 pt-16 pb-24 grid lg:grid-cols-[1.05fr_1fr] gap-14 items-center">
+      <div className="max-w-7xl mx-auto px-6 pt-16 pb-24 grid lg:grid-cols-[1fr_1.1fr] gap-14 items-center">
         <div className="animate-fade-up">
           <div className="chip chip-teal mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-[color:var(--teal)]" />
@@ -39,7 +39,7 @@ export default function Hero() {
         </div>
 
         <div className="relative">
-          <KnowledgeGraphHero />
+          <IllustratedScene />
         </div>
       </div>
 
